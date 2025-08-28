@@ -20,7 +20,7 @@ def load_user(user_id):
 
 def calculate_balance(user_id, start_date=None, end_date=None):
     if not start_date:
-        start_date = datetime.strptime('2023-01-01', '%Y-%m-%d').date()  # Start from a very early date
+        start_date = datetime.strptime('2023-01-01', '%Y-%m-%d').date()
     if not end_date:
         end_date = date.today()
 
@@ -437,9 +437,9 @@ def export_reports():
                 cw.writerow([
                     student.name,
                     student.roll_no,
-                    f"₹{total_payments:.2f}",
-                    f"₹{meals_cost * Config.MEAL_COST:.2f}",
-                    f"₹{balance:.2f}"
+                    f"Rs. {total_payments:.2f}",
+                    f"Rs. {meals_cost * Config.MEAL_COST:.2f}",
+                    f"Rs. {balance:.2f}"
                 ])
 
     elif report_type == 'collections':
@@ -454,7 +454,7 @@ def export_reports():
         for month, total in sorted(monthly_collections.items()):
             cw.writerow([
                 datetime.strptime(month, '%Y-%m').strftime('%B %Y'),
-                f"₹{total:.2f}"
+                f"Rs. {total:.2f}"
             ])
 
     elif report_type == 'payments':
@@ -466,7 +466,7 @@ def export_reports():
                 payment.date.strftime('%Y-%m-%d'),
                 payment.student.name,
                 payment.student.roll_no,
-                f"₹{payment.amount:.2f}",
+                f"Rs. {payment.amount:.2f}",
                 payment.status
             ])
             
@@ -542,16 +542,3 @@ def student_profile():
         flash('Profile updated successfully')
     
     return render_template('student/profile.html')
-
-# if __name__ == '__main__':
-#     with app.app_context():
-#         db.create_all()
-        
-#         # Create admin user if not exists
-#         if not User.query.filter_by(username='admin').first():
-#             admin = User(username='admin', role='admin')
-#             admin.set_password('admin')
-#             db.session.add(admin)
-#             db.session.commit()
-    
-#     app.run(debug=True)
