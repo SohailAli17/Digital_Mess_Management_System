@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="card shadow">
+            <div class="card-body p-5">
+                <h3 class="card-title text-center mb-4">Student Registration</h3>
+                <form method="POST" action="{{ url_for('register') }}">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="username" name="username" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" required>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Full Name</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="roll_no" class="form-label">Roll Number</label>
+                            <input type="text" class="form-control" id="roll_no" name="roll_no" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="room_no" class="form-label">Room Number</label>
+                            <input type="text" class="form-control" id="room_no" name="room_no" required>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="contact" class="form-label">Contact Number</label>
+                        <input type="text" class="form-control" id="contact" name="contact" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Register</button>
+                </form>
+                <hr>
+                <div class="text-center">
+                    <a href="{{ url_for('login') }}">Already have an account? Login</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

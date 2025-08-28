@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="mb-4">Student Dashboard</h2>
+
+<div class="row">
+    <div class="col-md-4 mb-4">
+        <div class="card card-stats bg-primary text-white">
+            <div class="card-body">
+                <h5 class="card-title">Today's Meals</h5>
+                <div class="d-flex justify-content-between mt-3">
+                    <div>
+                        <span class="badge bg-light text-dark">Breakfast: {% if today_meal and today_meal.breakfast %}Yes{% else %}No{% endif %}</span>
+                    </div>
+                    <div>
+                        <span class="badge bg-light text-dark">Lunch: {% if today_meal and today_meal.lunch %}Yes{% else %}No{% endif %}</span>
+                    </div>
+                    <div>
+                        <span class="badge bg-light text-dark">Dinner: {% if today_meal and today_meal.dinner %}Yes{% else %}No{% endif %}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card card-stats bg-success text-white">
+            <div class="card-body">
+                <h5 class="card-title">Payments</h5>
+                <h3 class="card-text">₹{{ total_paid }}/₹{{ total_due }}</h3>
+                <p class="card-text">Balance: ₹{{ balance }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card card-stats bg-info text-white">
+            <div class="card-body">
+                <h5 class="card-title">Quick Actions</h5>
+                <div class="d-grid gap-2">
+                    <a href="{{ url_for('student_attendance') }}" class="btn btn-light btn-sm">View Attendance</a>
+                    <a href="{{ url_for('student_payments') }}" class="btn btn-light btn-sm">View Payments</a>
+                    <a href="{{ url_for('student_profile') }}" class="btn btn-light btn-sm">Update Profile</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h5 class="card-title">Recent Meals</h5>
+    </div>
+    <div class="card-body">
+        <p class="text-muted">View your complete meal history in the Attendance section.</p>
+    </div>
+</div>
+{% endblock %}

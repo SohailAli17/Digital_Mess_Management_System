@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="mb-4">My Profile</h2>
+
+<div class="card">
+    <div class="card-body">
+        <form method="POST" action="{{ url_for('student_profile') }}">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="username" value="{{ current_user.username }}" disabled>
+                    <div class="form-text">Username cannot be changed.</div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="password" class="form-label">Password (leave blank to keep current)</label>
+                    <input type="password" class="form-control" id="password" name="password">
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="name" class="form-label">Full Name</label>
+                <input type="text" class="form-control" id="name" name="name" value="{{ current_user.name }}" required>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="roll_no" class="form-label">Roll Number</label>
+                    <input type="text" class="form-control" id="roll_no" name="roll_no" value="{{ current_user.roll_no }}" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="room_no" class="form-label">Room Number</label>
+                    <input type="text" class="form-control" id="room_no" name="room_no" value="{{ current_user.room_no }}" required>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="contact" class="form-label">Contact Number</label>
+                <input type="text" class="form-control" id="contact" name="contact" value="{{ current_user.contact }}" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Update Profile</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="mb-4">Mark Attendance</h2>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <div class="row align-items-center">
+            <div class="col-md-3">
+                <label for="attendance-date" class="form-label">Select Date</label>
+                <input type="date" class="form-control" id="attendance-date" value="{{ selected_date }}">
+            </div>
+            <div class="col-md-9">
+                <div class="d-flex justify-content-end">
+                    <div class="me-3">
+                        <span class="badge bg-primary">Breakfast: {{ meal_dict.values()|selectattr('breakfast')|list|length }}</span>
+                    </div>
+                    <div class="me-3">
+                        <span class="badge bg-success">Lunch: {{ meal_dict.values()|selectattr('lunch')|list|length }}</span>
+                    </div>
+                    <div>
+                        <span class="badge bg-info">Dinner: {{ meal_dict.values()|selectattr('dinner')|list|length }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-striped attendance-table">
+                <thead>
+                    <tr>
+                        <th>Student Name</th>
+                        <th>Roll No</th>
+                        <th>Room No</th>
+                        <th>Breakfast</th>
+                        <th>Lunch</th>
+                        <th>Dinner</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for student in students %}
+                    <tr>
+                        <td>{{ student.name }}</td>
+                        <td>{{ student.roll_no }}</td>
+                        <td>{{ student.room_no }}</td>
+                        <td>
+                            <input type="checkbox" class="meal-checkbox" data-student-id="{{ student.id }}" data-meal-type="breakfast" 
+                                {% if student.id in meal_dict and meal_dict[student.id].breakfast %}checked{% endif %}>
+                        </td>
+                        <td>
+                            <input type="checkbox" class="meal-checkbox" data-student-id="{{ student.id }}" data-meal-type="lunch" 
+                                {% if student.id in meal_dict and meal_dict[student.id].lunch %}checked{% endif %}>
+                        </td>
+                        <td>
+                            <input type="checkbox" class="meal-checkbox" data-student-id="{{ student.id }}" data-meal-type="dinner" 
+                                {% if student.id in meal_dict and meal_dict[student.id].dinner %}checked{% endif %}>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

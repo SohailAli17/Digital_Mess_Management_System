@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="mb-4">My Attendance</h2>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <form method="GET" action="{{ url_for('student_attendance') }}">
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label for="start_date" class="form-label">Start Date</label>
+                    <input type="date" class="form-control" id="start_date" name="start_date" value="{{ start_date }}">
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="end_date" class="form-label">End Date</label>
+                    <input type="date" class="form-control" id="end_date" name="end_date" value="{{ end_date }}">
+                </div>
+                <div class="col-md-4 mb-3 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary w-100">Filter</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h5 class="card-title">Meal History ({{ start_date }} to {{ end_date }})</h5>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Breakfast</th>
+                        <th>Lunch</th>
+                        <th>Dinner</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for meal in meals %}
+                    <tr>
+                        <td>{{ meal.date }}</td>
+                        <td>{% if meal.breakfast %}Yes{% else %}No{% endif %}</td>
+                        <td>{% if meal.lunch %}Yes{% else %}No{% endif %}</td>
+                        <td>{% if meal.dinner %}Yes{% else %}No{% endif %}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
